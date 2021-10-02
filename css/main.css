@@ -1,0 +1,177 @@
+
+*{
+    list-style: none;
+}
+li:hover{color: orangered;cursor: pointer;}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fafafa;
+}
+.menu{
+    margin: 2px;
+}
+.menu li{
+    display: inline-block;
+}
+.logo{
+    margin: 0 140px;
+}
+.from_timkiem{
+    width: 50%;
+}
+/**/
+.menumain{
+    background-color: white;
+    margin-left: 0px;
+    border-radius: 0 0 100px 100px;
+    position: absolute;
+}
+.unmenumain_absolute{
+    position: unset;
+}
+.mar-4{
+    margin-left: 50px;
+}
+.img_menu{
+    height: 600px;
+}
+/* Phần thẻ dịch vụ */
+.dv__left{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+.dv__left img{
+    width: 75%;
+}
+.dv__right{
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+.hover_pointer:hover{cursor: pointer;}
+
+/* Phần trưng bày */
+.xemtatca1{
+    width: 30%;
+    height: 40px;
+    transform: skewX(15deg);
+    margin: 0 auto;
+}
+.xemtatca2{
+    position: absolute;
+    left: 37%;
+    width: 30%;
+    height: 40px;
+    transform: skewX(-15deg);
+    margin: 0 auto;
+}
+.xemtatca3{
+    position: absolute;
+    left: 37%;
+    width: 25%;
+    height: 40px;
+    background-color: aquamarine;
+    margin: 0 auto;
+    font-size: 20px;
+}
+.sp_trungbay{
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../img/feature_banner.jpg);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 100%;
+    display: flex;
+}
+
+@keyframes hieuung{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(-30px);
+    }
+
+}
+
+.hv{overflow: hidden;}
+.hv:hover{
+    animation: hieuung linear 0.3s forwards;
+    box-shadow: 1px 1px 20px 2px white;
+}
+/* phần các mục dịch vụ */
+
+.danhmuccon{
+    background-color: white;
+    border-radius: 5px;
+}
+.danhmuccon:first-child{
+    margin-left: 10%;
+}
+.hv_len:hover{
+    animation: hieuunglen linear 0.5s forwards;
+    box-shadow: 1px 1px 20px 2px black;
+}
+@keyframes hieuunglen{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(-30px);
+    }
+
+}
+@keyframes hieuungxuong{
+    from{
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(30px);
+    }
+
+}
+.hv_xuong:hover{
+    animation: hieuungxuong linear 0.5s forwards;
+    box-shadow: 1px 1px 20px 2px black;
+}
+.duy{
+    overflow-y:unset;
+    
+}
+
+/*Phần sản phẩm mới*/
+.nghieng{
+    transform: skewX(-30deg);
+    
+}
+.hv-toi{overflow: hidden;}
+.hv-toi:hover{
+    animation: hieuung linear 0.3s forwards;
+    box-shadow: 1px 1px 20px 2px black;
+}
+
+.canhgiua{
+    background-position: right top;
+}
+.hv-mauchu li:hover{
+    color:#D65106;
+    cursor: pointer;
+    
+}
+/* hover làm mờ */ .hv_mo:hover{opacity: 0.9;}
+/* giohang */
+.giohang{
+    background-color: rgb(226, 231, 231);
+    border-radius: 20px;
+    width: 1000px;
+    height: 736px;
+    position: absolute;
+    right: -1000px; 
+    top: 30px;
+    box-shadow: 5px 5px 20px 5px black;
+    position: fixed ;
+    z-index: 3;
+}
+/* #nut{
+    animation: tes linear 3s  forwards;
+} */

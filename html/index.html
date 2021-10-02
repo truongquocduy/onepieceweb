@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece - Vừa bán vừa cho</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/wow.min.js"></script>
+    <link rel = "stylesheet" href = "../css/animate.css">
+    <script>
+        new WOW().init();
+    </script>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        @media only screen and (max-width:550px){
+            .logo{
+            margin: 0 1px;
+            }
+            .from_timkiem{
+                 width: 100%;
+            }
+            .mar-4{
+                margin-left: -16px;
+            }
+            .img_menu{
+                height: 300px;
+            }
+            .dv__left img{
+                width: 90%;
+            }
+            .dv__right p{
+                font-size: 12px;
+            }
+            .sp_trungbay{
+                background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../img/nen.jpg);
+                background-attachment: fixed;
+                background-position: center center;
+                background-size: 100%;
+                display: flex;
+            }
+            .hv:hover{
+                animation: none;
+                box-shadow: 1px 1px 20px 2px white;
+            }
+            .danhmuccon:first-child{
+                margin-left: 0%;
+            }
+            .duy{
+                overflow-y: scroll;
+                overflow-x: hidden ;
+            }  
+            .hv_xuong:hover{
+                animation: none;
+                border: 1px solid gray;
+                box-shadow: none;
+            } 
+            .hv_len:hover{
+                animation: none;
+                border: 1px solid gray;
+                box-shadow: none;
+            } 
+            .hv-toi:hover{
+                animation: none;
+                box-shadow: 1px 1px 20px 2px black;
+            }
+            .canhgiua{
+                background-position: center;
+                background-size: 100%;
+            }
+            /* phân modal */
+            .an{display: none;}
+        }
+        @media only screen and (max-width:1200px){
+            .mar-4{
+                margin-left: -16px;
+            }
+
+            .sp_trungbay{
+                background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../img/nen.jpg);
+                background-attachment: fixed;
+                background-position: center center;
+                background-size: 100%;
+                display: flex;
+            }
+            
+            .danhmuccon:first-child{
+                margin-left: 0%;
+            }
+            .duy{
+                overflow-y: scroll;
+                overflow-x: hidden ;
+            }  
+            
+            .canhgiua{
+                background-position: center;
+                background-size: 100%;
+            }
+            /* phân modal */
+            .an{display: none;}
+            .giohang{display: none;}
+
+        }
+        @keyframes tes{
+            from{
+                transform: translateX(0);
+            }
+            to{
+                transform: translateX(-1000px);
+            }
+    
+        }
+        @keyframes tesout{
+            from{
+                transform: translateX(-1000px);
+            }
+            to{
+                transform: translateX(0);
+            }
+            
+        }
+    </style>
+    <script>
+        var x = 1;
+        function cheman() {
+            document.getElementById('a').style.animation = "tes linear 2s forwards";
+        }
+        function dongman() {
+            document.getElementById('a').style.animation = "tesout linear 2s forwards";
+        }
+        function khoidong() {
+            if(x % 2 == 0){
+                dongman();
+                x++;
+            }
+            else{
+                cheman();
+                x++;
+                loadkhunggiohang();
+            }
+            if(x > 10)
+                x = 1;
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid" style="padding-right: -1px;">
+        <div class="row text-light" style="background-color:rgb(254, 80, 0);">
+            <div class="col-6 col-lg-6 text-right">Giảm 5% cho tất cả đơn hàng</div>
+            <div class="col-6 col-lg-6">Miễn phí vận chuyển cho đơn hàng trên 5 triệu</div>
+        </div>
+        <div class="row" style="border-bottom: 1px solid gray;">
+            <div class="col-6 col-lg-6 text-right">Bạn cần giúp đỡ? Hãy gọi: <a href="#">0369082061</a> hoặc <a href="#">quocduy13579113@gmail.com</a></div>
+            <div class="col-6 col-lg-6">
+                <ul class="menu justify-content">
+                    <li class="mr-3"><a class="a-link" href="../html/index.html">Trang chủ</a></li>
+                    <li class="mr-3"><a class="a-link" href="../html/gioithieu.html">Giới thiệu</a></li>
+                    <li class="mr-3"><a class="a-link" href="../html/lienhe.html">Liên hệ</a></li>
+                    <li class=""><a class="a-link" href="#">Hướng dẫn sử dụng</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Phần giỏ hàng -->
+        <div class="giohang" id="a" >
+            
+            <div class="row pl-5 w-100 pt-5">
+                <div class="col-lg-12 pt-3" style="border: 1px solid rgb(27 168 255);border-radius: 5px;color: rgb(27 168 255);background-color: rgb(232 246 255);">
+                    <p style="font-size: 14px;"> <i class="fas fa-exclamation-circle"></i> Do ảnh hưởng của dịch Covid-19, một số khu vực có thể nhận hàng chậm hơn dự kiến. Cám ơn sự thông cảm của quý khách.</p>
+                </div>
+                <div class="col-lg-6 pt-3 mt-3" style="border: 1px solid rgb(27 168 255);border-radius: 5px;background-color: rgb(194 225 255)">
+                    <p style="font-size: 14px;">Miễn phí vận chuyển đơn từ 149K của mỗi nhà bán có logo</p>
+                </div>
+                <button class="btn btn-success" id="nut" style="position: absolute;width: 50px;height: 150px;top: 40%;left: -46px;" onclick="khoidong();" onclick="loadkhunggiohang();">
+                    <i class="fas fa-shopping-cart" style="font-size: 20px;"></i>
+                </button>
+                <div class="col-lg-8 mt-3" style="">
+                    <h4>GIỎ HÀNG</h4>
+                    <table class="table table-bordered table-striped"data-toggle="table" id="bangdulieu">
+                        <thead>
+                            <tr>
+                            <th style="background-color: #FF0F1E;color: white;" >Tên sản phẩm</th>
+                            <th style="background-color: #FF0F1E;color: white;" >Hình sản phẩm</th>
+                            <th style="background-color: #FF0F1E;color: white;" >Giá sản phẩm</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row pt-3" style="margin-top: 34px;" >
+                        <div class="col-lg-12 pt-3" style="background-color:white;border-radius: 5px 5px 0 0;"><h6>Giao tới</h6></div>
+                        <div class="col-lg-6" style="border-right: 1px solid black;background-color:white;"><strong>Quốc Duy</strong></div>
+                        <div class="col-lg-6"  style="background-color:white;"><strong>0369082061</strong></div>
+                        <p class="text-muted pl-3 pb-3" style="font-size: 12px;background-color: white;">59A, Thạch Lam, Phường Phú Thạnh, Quận Tân Phú, Hồ Chí Minh</p>
+                        <div class="col-lg-12" style="background-color:white;border-radius: 5px;">
+                            <p>One Piece khuyến mãi</p>
+                           <a href="#"> <i class="fas fa-ticket-alt"></i> Chọn hoặc nhập khuyến mãi</a>
+                        </div>
+                        <div class="col-lg-12 mt-4" style="background-color: white;border-radius: 0 0 5px 5px;">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="text-muted" style="width:70%">Tạm tính</td>
+                                    <td style="width:30%">0đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted" style="width:70%">Giảm giá</td>
+                                    <td style="width:30%">0đ</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted" style="width:70%">Số lượng</td>
+                                    <td style="width:30%" id="soluong">0</td>
+                                </tr>
+                                <tr class="">
+                                    <td class="text-muted pt-4" style="width:70%;border-top: 1px solid rgb(146, 144, 144);">Tổng cộng</td>
+                                    <td class="text-danger pt-4" style="width:30%;font-size: 30px;border-top: 1px solid rgb(146, 144, 144);" id="tongtien">0đ</td>
+                                </tr>
+                            </table>
+                            <p class="text-muted" style="font-size: 12px;">(Đã bao gồm thuế VAT nếu có)</p>
+                            <button class="btn w-100 text-light mb-4" style="background-color: rgb(255 15 30);">Mua Hàng</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+    
+                <!-- Indicators -->
+                <!-- <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                </ul> -->
+              
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../img/slider_1.jpg" class="w-100 img_menu" alt="Los Angeles">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/slider_2.jpg" class="w-100 img_menu" alt="Chicago">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row menumain w-100 justify-content-center">
+                <nav class="navbar navbar-expand-md navbar-light" style="width:80%;">
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="#"><img src="../img/dz36f6-ea413c48-5e79-4259-8aea-5a2ba0c2257f.png" alt="" style="height: 90px;"></a>
+                  
+                    <!-- Toggler/collapsibe Button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                  
+                    <!-- Navbar links -->
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        
+                        <ul class="navbar-nav mar-4">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><button class="btn text-light" style="background-color: #D65106;">Trang chủ</button></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><button class="btn text-dark">Danh Mục <i class="fas fa-caret-down"></i></button></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><button class="btn text-dark" data-toggle="modal" data-target="#dangnhap">Đăng Nhập</button></a>
+                            </li>
+                        </ul>
+                        <form class="form-inline from_timkiem" action="">
+                            <div class="input-group mb-3 pt-3 w-100" style="border-radius: 5px;">
+                                <input type="text" class="form-control" placeholder="Tìm sản phẩm mong muốn...">
+                                <div class="input-group-append ">
+                                  <button class="btn btn-success ml-3" type="submit" style="border-radius: 5px;">Tìm Kiếm</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                </nav>
+               
+            </div>
+
+        </div>
+        <!-- Phần thẻ dịch vụ -->
+        <div class="row pt-3">
+            <div class="col-lg-3 col-6 hover_pointer" style="">
+                <div class="dv__left text-center"><img src="../img/banner1.svg" class="" alt="" style="margin: 0 auto;"></div>
+                <div class="dv__right pt-4">
+                    <strong>Miễn phí vẫn chuyển</strong>
+                    <p>
+                        Evo Tools miễn phí vận chuyển
+                        với đơn hàng trên 350.000đ
+                    </p>
+                </div>
+            </div> 
+            <div class="col-lg-3 col-6 hover_pointer" style="">
+                <div class="dv__left text-center"><img src="../img/banner2.svg" class="" alt="" style="margin: 0 auto;"></div>
+                <div class="dv__right pt-4">
+                    <strong>Đổi trả trong vòng 7 ngày</strong>
+                    <p>
+                        Lỗi là đổi mới trong 1 tháng tận nhà
+                    </p>
+                </div>
+            </div> 
+            <div class="col-lg-3 col-6 hover_pointer" style="">
+                <div class="dv__left text-center"><img src="../img/banner3.svg" class="" alt="" style="margin: 0 auto;"></div>
+                <div class="dv__right pt-4">
+                    <strong>Bảo hành chính hãng</strong>
+                    <p>
+                        Bảo hành chính hãng sản phẩm, có
+                        người đến tận nhà
+                    </p>
+                </div>
+            </div> 
+            <div class="col-lg-3 col-6 hover_pointer" style="">
+                <div class="dv__left text-center"><img src="../img/banner4.svg" class="" alt="" style="margin: 0 auto;"></div>
+                <div class="dv__right pt-4">
+                    <strong>Phương thức thanh toán</strong>
+                    <p>
+                        Hỗ trợ thanh toán qua thẻ: Vietcombank,
+                        Techcombank, BIDV,...
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto text-center">
+                <img src="../img/giasoc.svg" style="height: 50px;" alt="">
+                <img src="../img/flash.gif" alt="">
+                <img src="../img/slogan.svg" style="height: 50px;" alt="">
+            </div> 
+        </div>
+        <!-- Phần trưng bày sản phẩm -->
+        <div class="row sp_trungbay mt-3 wow zoomOut">
+            <div class="xemtatca1  mx-auto bg-light"></div>
+            <div class="xemtatca2  mx-auto bg-light"></div>
+            <div class="xemtatca3  mx-auto bg-light text-center pl-3"> <a href="#">Xem tất cả</a>  </div>
+            <div class="row w-100 justify-content-center mb-5" style="margin: 0 auto;margin-top: 100px;">
+                <a href="../html/sp1.html" class="text-dark" style="text-decoration: none;">
+                    <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv" style="border-radius: 15px;background-color: white;">
+                        <img src="../img/sp/1.jpg" id="hinhsp1" class="w-100" alt="">
+                        <p class="text-center">
+                           <span id="tensp1">Laptop  ASUS TUF Gaming A15 FA506IU-AL127T </span><br>
+                            <span id="giasp1">25.069.000</span> $ <br>
+                            Thương hiệu: <a href="#">Asus</a>
+                        </p>
+                        <button class="btn btn-outline-warning mx-auto d-block mb-3" style="font-size: 13px;" onclick="themvaogiohang(1);">Thêm vào giỏ</button>
+                        <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                    </div>
+                </a>
+                <a href="../html/sp2.html" class="text-dark" style="text-decoration: none;">
+                    <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv" style="border-radius: 15px;background-color: white;">
+                        <img src="../img/sp/2z.jpg" id="hinhsp2" class="w-100" alt="">
+                        <p class="text-center">
+                            <span id="tensp2">Laptop Huawei Matebook D15 (8GB/256GB)</span> <br>
+                            <span id="giasp2">14.099.000</span> $ <br>
+                            Thương hiệu: <a href="#">Huawei</a>
+                        </p>
+                        <button class="btn btn-outline-warning mx-auto d-block mb-3" style="font-size: 13px;" onclick="themvaogiohang(2);">Thêm vào giỏ</button>
+                        <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                    </div>
+                </a>
+                <a href="../html/sp3.html" class="text-dark" style="text-decoration: none;">
+                    <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv" style="border-radius: 15px;background-color: white;">
+                        <img src="../img/sp/3z.png" id="hinhsp3" class="w-100" alt="">
+                        <p class="text-center">
+                            <span id="tensp3">Tủ lạnh Samsung Inverter 595 lít RS64T5F01B4/SV</span><br>
+                            <span id="giasp3">7.990.000</span> $ <br>
+                            Thương hiệu: <a href="#">Samsung</a>
+                        </p>
+                        <button class="btn btn-outline-warning mx-auto d-block mb-3" style="font-size: 13px;" onclick="themvaogiohang(3);">Thêm vào giỏ</button>
+                        <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                    </div>
+                </a>
+                <a href="../html/sp4.html" class="text-dark" style="text-decoration: none;">
+                    <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv" style="border-radius: 15px;background-color: white;">
+                        <img src="../img/sp/4z.jpg" id="hinhsp4" class="w-100" alt="">
+                        <p class="text-center">
+                            <span id="tensp4">Smart Tivi Samsung 4K 55 inch UA55TU8100T</span> <br>
+                            <span id="giasp4">24.590.000 </span>$ <br>
+                            Thương hiệu: <a href="#">Samsung</a>
+                        </p>
+                        <button class="btn btn-outline-warning mx-auto d-block mb-3" style="font-size: 13px;" onclick="themvaogiohang(4);">Thêm vào giỏ</button>
+                        <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                    </div>
+                </a>
+                <a href="../html/sp5.html" class="text-dark" style="text-decoration: none;" >
+                    <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv" style="border-radius: 15px;background-color: white;">
+                        <img src="../img/sp/5z.jpg" id="hinhsp5" class="w-100" alt="">
+                        
+                        <p class="text-center">
+                            <span id="tensp5">Điện Thoại iPhone 12 Pro Max 128GB</span> <br>
+                            <span id="giasp5">29.999.000</span> $<br>
+                            Thương hiệu: <a href="#">Apple</a>
+                        </p>
+                        <button class="btn btn-outline-warning mx-auto d-block mb-3" style="font-size: 13px;" onclick="themvaogiohang(5);">Thêm vào giỏ</button>
+                        <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row duy" style="height: 132px;">
+            <div class="danhmuccon h-100 text-center pt-3 hv_len" style="width:118px;">
+                <img src="../img/danhmuc/menu1.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Mã giảm giá</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_xuong" style="width:118px;">
+                <img src="../img/danhmuc/menu2.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Bí kíp săn <br> sale</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_len" style="width:118px;">
+                <img src="../img/danhmuc/menu3.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Nạp thẻ & <br>Tiền điện</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_xuong" style="width:118px;">
+                <img src="../img/danhmuc/menu4.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Free ship</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_len" style="width:118px;">
+                <img src="../img/danhmuc/menu5.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Hoàn tiền <br>15%</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_xuong" style="width:118px;">
+                <img src="../img/danhmuc/menu6.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Dành cho hội <br>viên</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_len" style="width:118px;">
+                <img src="../img/danhmuc/menu7.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Hẹn giao & <br>Lắp đặt</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_xuong" style="width:118px;">
+                <img src="../img/danhmuc/menu8.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Coupon 50%</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_len" style="width:118px;">
+                <img src="../img/danhmuc/menu9.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Thực phẩm <br>tươi sống</p>
+            </div>
+            <div class="danhmuccon h-100 text-center pt-3 hv_xuong" style="width:118px;">
+                <img src="../img/danhmuc/menu10.png" class="w-50" alt="">
+                <p class="mt-3" style="font-size: 13px;">Ưu đãi đối tác</p>
+            </div>
+        </div>
+        <!-- Phần sản phẩm mới -->
+        <div class="row pl-5 mt-4">
+            <div class="col-lg-3"><h5>Sản phẩm mới</h5></div>
+            <div class="col-lg-9 bg-light text-right pr-5">
+                <div class="bg-warning text-dark nghieng mr-3 text-center" style="padding: 7px 10px;width: 14%;float: right;">Sản phẩm khác</div>
+                <div class="bg-warning text-dark nghieng mr-3 text-center" style="padding: 7px 10px;width: 13%;float: right;">Thiết bị Wifi</div>
+                <div class="bg-warning text-dark nghieng mr-3 text-center" style="padding: 7px 10px;width: 13%;float: right;">Laptop</div>
+                <div class="bg-warning text-dark nghieng mr-3 text-center" style="padding: 7px 10px;width: 13%;float: right;">Điện thoại</div>
+                <div class="bg-warning text-dark nghieng mr-3 text-center" style="padding: 7px 10px;width: 14%;float: right;">Sản phẩm chính</div>
+            </div>
+            <div class="row w-100 mb-5 justify-content-center" style="">
+                <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv-toi" style="border-radius: 5px;background-color: white;">
+                    <img src="../img/sp/1.jpg" class="w-100" alt="">
+                    <p class="text-center">
+                        Laptop ASUS TUF Gaming A15 FA506IU-AL127T <br>
+                        *****<br>
+                        <strong>25.069.000 $</strong>
+                    </p>
+                    <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv-toi" style="border-radius: 5px;background-color: white;">
+                    <img src="../img/sp/7z.jpg" class="w-100" alt="">
+                    <p class="text-center">
+                        Laptop Acer Nitro 5 2020 AN515-55-5923<br>
+                        *****<br>
+                        <strong>20.690.000 $</strong>
+                    </p>
+                    <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv-toi" style="border-radius: 5px;background-color: white;">
+                    <img src="../img/sp/2z.jpg" class="w-100" alt="">
+                    <p class="text-center">
+                        Laptop Huawei Matebook D15 (8GB/256GB) <br>
+                        *****<br>
+                        <strong>14.099.000 $</strong>
+                    </p>
+                    <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv-toi" style="border-radius: 5px;background-color: white;">
+                    <img src="../img/sp/9z.jpg" class="w-100" alt="">
+                    <p class="text-center">
+                        Dép tổ ong màu xanh nam tính - Hàng nhập khẩu <br>
+                        *****<br>
+                        <strong>199.00 $</strong>
+                    </p>
+                    <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-5 mr-3 pt-3 pb-4 mb-3 hv-toi" style="border-radius: 5px;background-color: white;">
+                    <img src="../img/sp/10z.jpg" class="w-100" alt="">
+                    
+                    <p class="text-center">
+                        Set 3 muỗng thìa ăn sữa chua cho bé <br>
+                        *****<br>
+                        <strong>39.999 $</strong>
+                    </p>
+                    <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto pl-4 pr-4" style="">
+            <div class="col-lg-6 hv_mo">
+                <img src="../img/bosch.jpg" class="w-100 mb-3" alt="" style="border-radius: 10px;">
+            </div>
+            <div class="col-lg-6 hv_mo">
+                <img src="../img/nikawa.jpg" class="w-100" alt="" style="border-radius: 10px;">
+            </div>
+        </div>
+
+        <div class="row w-100 mb-5" style="margin: 0 auto;margin-top: 100px;">
+            <div class="col-lg-3 canhgiua mb-4" style="border-radius: 10px;background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../img/maycam__left.jpg);background-size: 86%;background-repeat: no-repeat;">
+                <ul class="text-light text-center hv-mauchu">
+                    <h3 class="text-light mt-5 text-center mb-3" style="font-weight: 800;">Máy cầm tay điện</h3>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Máy khoan vặn vít</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Máy mài góc cắt gạck</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Máy cưa đĩa của xích</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Máy khoan đục bê tông</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Máy chà nhám đánh bóng</li>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 mb-3" style="border-bottom: 1px solid black;"><h5>Sản phẩm cầm tay</h5></div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/maycua.jpg" class="w-100" alt="">
+                            <p class="text-center">
+                                Máy cưa cầm tay 18V DeWalt<br>
+                                DCS391N-KR DEW37300001470<br>
+                                *****<br>
+                                <strong>3.809.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/maykhoan.jpg" class="w-100" alt="">
+                            <p class="text-center">
+                                Máy khoan DEW37300001470<br>
+                                DCS391N-KR <br>
+                                *****<br>
+                                <strong>3.580.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/maykhoancamtay.png" class="w-100" alt="">
+                            <p class="text-center">
+                                Máy khoan cầm tay 20V Delwakt<br>
+                                DCH273B <br>
+                                *****<br>
+                                <strong>4.200.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/maykhoanbua.jpg" class="w-100" alt="">
+                            <p class="text-center">
+                                Máy khoan búa Dewalt D25033K<br>
+                                (22mm) <br>
+                                *****<br>
+                                <strong>2.550.000</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px;background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- phần điện thoại -->
+        <div class="row w-100 mb-5" style="margin: 0 auto;margin-top: 100px;">
+            <div class="col-lg-3 canhgiua mb-4" style="border-radius: 10px;background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../img/sp/dienthoai.jpg);background-size: 86%;background-repeat: no-repeat;">
+                <ul class="text-light text-center hv-mauchu">
+                    <h3 class="text-light mt-5 text-center mb-3" style="font-weight: 800;">Điện thoại thông minh</h3>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Iphone</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">SamSung</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Xiaomi</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Vsmart</li>
+                    <li style="margin-bottom: 15px;font-weight: 600;">Oppo</li>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 mb-3" style="border-bottom: 1px solid black;"><h5>Điện thoại thông minh</h5></div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/5z.jpg" class="w-100" alt="">
+                            <p class="text-center">
+                                Điện thoại Iphone 12 ProMax<br>
+                                128GB<br>
+                                *****<br>
+                                <strong>29.999.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/12z.png" class="w-100" alt="">
+                            <p class="text-center">
+                                Điện thoại Xiaomi POCO M3-<br>
+                                Hàng chính hãng<br>
+                                *****<br>
+                                <strong>3.190.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/13z.jpg" class="w-100" alt="">
+                            <p class="text-center">
+                                SamSung Galaxy S20 (8GB/64GB)<br>
+                                *****<br>
+                                <strong>4.200.000 $</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px; background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 col-6 mb-3" >
+                        <div class="pb-4 pl-3 pr-3 hv-toi" style="border-radius: 5px; overflow: hidden;background-color: white;">
+                            <img src="../img/sp/14z.png" class="w-100" alt="">
+                            <p class="text-center">
+                                SamSung Galaxy<br>
+                                S20 Ultra 5G<br>
+                                *****<br>
+                                <strong>24.959.000</strong>
+                            </p>
+                            <div class="w-100 text-light text-center" style="border-radius: 15px;padding: 1px;background-color: red;">Vừa bán vừa cho</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row pl-5 pr-5">
+            <img src="../img/maymay.jpg" class="w-100 ml-3" alt="">
+        </div>
+
+        <!-- Phần báo -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-12">
+                <h5 class="text-left ml-5">Tin nổi bật</h5>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="p-4" style="background-color: white;border-radius: 10px;">
+                    <img src="../img/tintuc1.jpg" class="w-100" alt="" style="border-radius: 5px;">
+                    <h6 class="mt-3" style="font-weight: 550;color:black;">Cải tiến gì trên máy khoan pin Bosch GSB 120-LI được mến mộ?</h6>
+                    <p>
+                        Máy khoan pin Bosch GSB 120-LI đời mới nhỏ gọn hơn, mạnh mẽ hơn tối ưu hóa ...
+                        Evo ToolsEvo Themes
+                        Evo Tools16/02/2021
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="p-4" style="background-color: white;border-radius: 10px;">
+                    <img src="../img/tintuc2.jpg" class="w-100" alt="" style="border-radius: 5px;">
+                    <h6 class="mt-3" style="font-weight: 550;color:black;">Tổng hợp các công nghệ sử dụng trong máy khoan Bosch</h6>
+                    <p>
+                        Tìm hiểu ngay 16 công nghệ sử dụng trong máy khoan Bosch: Lion, Electronic ... Evo ToolsEvo Themes
+                        Evo Tools16/02/2021
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="p-4" style="background-color: white;border-radius: 10px;">
+                    <img src="../img/tintuc3.jpg" class="w-100" alt="" style="border-radius: 5px;">
+                    <h6 class="mt-3" style="font-weight: 550;color:black;">Khám phá mũi khoan bê tông chuôi gài 5 khía Bosch SDS Max</h6>
+                    <p>
+                        Lựa chọn mũi khoan bê tông chuôi gài 5 khía Bosch SDS Max cho dòng máy khoa... Evo ToolsEvo Themes
+                        Evo Tools16/02/2021
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="p-4" style="background-color: white;border-radius: 10px;">
+                    <img src="../img/tintuc4.jpg" class="w-100" alt="" style="border-radius: 5px;">
+                    <h6 class="mt-3" style="font-weight: 550;color:black;">Cách bảo quản pin của máy khoan không dây</h6>
+                    <p>
+                        Máy khoan pin ngày càng được ưa chuộng bởi thiết kế gọn nhẹ, dễ di chuyển, k... Evo ToolsEvo Themes
+                        Evo Tools16/02/2021
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row justify-content-center bg-secondary">
+            <div class="col-lg-2 col-5">
+                <img src="../img/post.png" class="w-75" alt="">
+            </div>
+            <div class="col-lg-4 col-7">
+                <p class=" mt-4">
+                    Đăng kí nhận bảng tin One Piece <br>
+                    Đừng bỏ lỡ hàng loạt sản phẩm và chương trình hấp dẫn
+                </p>
+            </div>
+            <div class="col-lg-5">
+                <div class="input-group mb-3 w-75 mt-4 mx-auto">
+                    <input type="email" class="form-control" placeholder="Địa chỉ email của bạn">
+                    <div class="input-group-append">
+                      <button class="btn btn-success" type="submit">Đăng kí</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <!-- Phần footer -->
+        <div class="row justify-content-center pt-3" style="padding-bottom: 300px;">
+            <div class="col-lg-2 col-sm-3 col-6">
+                <h5 style="font-weight: 550;">HỖ TRỢ KHÁCH HÀNG</h5>
+                <ul style="font-size:14px;padding-left: 0;line-height: 26px;">
+                    <li>Câu hỏi thường gặp</li>
+                    <li>Gửi yêu cầu hỗ trợ</li>
+                    <li>Hướng dẫn đặt hàng</li>
+                    <li>Phương thức vận chuyển</li>
+                    <li>Chính sách đổi trả</li>
+                    <li>Hướng dẫn trả góp</li>
+                    <li>Chính sách hàng nhập khẩu</li>
+                    <li>Hỗ trợ khách hàng</li>
+                    <li>Báo lỗi bảo mật</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-6">
+                <h5 style="font-weight: 550;">VỀ ONE PIECE</h5>
+                <ul style="font-size:14px;padding-left: 0;line-height: 26px;">
+                    <li>Giới thiệu One piece</li>
+                    <li>Tuyển dụng</li>
+                    <li>Chính sách bảo mật thánh toán</li>
+                    <li>Chính sách bảo mật thông tin cá nhân</li>
+                    <li>Chính sách giải quyết khiếu nại</li>
+                    <li>Điều khoản sử dụng</li>
+                    <li>Giới thiệu One piece Xu</li>
+                    <li>Bán hàng doanh nghiệp</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-6">
+                <h5 style="font-weight: 550;">HỢP TÁC DOANH NGHIỆP</h5>
+                <ul style="font-size:14px;padding-left: 0;line-height: 26px;">
+                    <li>Quy chế hoạt động sàn GDTMĐT</li>
+                    <li>Bán hàng cùng One Piece</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-6">
+                <h5 style="font-weight: 550;">PHƯƠNG THỨC THANH TOÁN</h5>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank1.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank2.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank3.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank4.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank5.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/bank6.svg" class="w-100" alt="">
+                </button>
+            </div>
+            <div class="col-lg-2">
+                <h5 style="font-weight: 550;">KẾT NỐI VỚI CHÚNG TÔI</h5>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/fb.svg" class="w-100" alt="">
+                </button>
+                <button class="btn" style="padding: 0;">
+                    <img src="../img/danhmuc/youtube.svg" class="w-100" alt="">
+                </button>
+            </div>
+        </div>
+    </div><!-- container -->
+    <!--Phân modal đăng kí  -->
+    <div class="modal fade" id="dangnhap">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body" style="padding:50px 0;border-radius: 10px; overflow: hidden;">
+                    <div class="row">
+                        
+                        <div class="col-lg-4 p-4 ml-3 an" style="background-color: white;">
+                            <h3>Đăng Nhập</h3>
+                            <p>
+                                Đăng nhập để theo dõi đơn hàng,lưu
+                                sách sản phẩm yêu thích, nhận
+                                nhiều ưu đãi hấp dẫn.
+                            </p>
+                            <img src="../img/graphic-map.png" alt="">
+                        </div>
+                        <div class="col-lg-7 ml-3 p-4" style="background-color: white;">
+                            <button type="button" class="close" data-dismiss="modal" style="font-size: 40px;">&times;</button>
+                            <div class="row" >
+                                <div class="col-lg-4"><h5>Đăng nhập</h5></div>
+                                <div class="col-lg-4 an"><h5>Tạo tài khoản</h5></div>
+                                
+                                <div class="col-lg-12" style="border-top: 1px solid black;">
+                                    <form action="">
+                                        <div class="form-group">
+                                          <label for="email">Email/SDT: </label>
+                                          <input type="email" class="form-control" id="email_sdt" placeholder="Nhập email hoặc số điện thoại">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="pwd">Mặt khẩu:</label>
+                                          <input type="password" class="form-control" placeholder="Mật khẩu từ 6 đến 32 kí tự" id="pwd">
+                                        </div>
+                                        <div class="form-group form-check">
+                                          <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox"> Lưu tài khoản
+                                          </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"  onclick="kiemtra();">Đăng nhập</button>
+                                      </form>
+                                      <p class="text-muted mt-3" style="font-size: 15px;">Quên mật khẩu: nhấn vào <a href="#">đây</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+<script>
+        // Phần giỏ hàng
+    var mangsp = [];
+    var txtsoluong = document.getElementById('soluong');
+    var txttongtien = document.getElementById('tongtien');
+    var table = document.getElementById('bangdulieu');
+    var tongtien = 0;
+ 
+    function themvaogiohang(masp) {
+ 
+    txtsoluong.style.visibility = "visible";
+ 
+    var tensp = document.getElementById('tensp' + masp);
+    var hinhsp = document.getElementById('hinhsp' + masp);
+    var giasp = document.getElementById('giasp' + masp);
+    giatam = giasp.innerText.replace('.', '').replace(".", "");
+ 
+    sanpham = { ten: tensp.innerText, hinh: hinhsp.src, gia: giatam };
+    tongtien += parseInt(giatam);
+    mangsp.push(sanpham);
+ 
+    txtsoluong.innerText = mangsp.length;
+    txttongtien.innerText = tongtien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+ 
+    }
+ 
+    
+    function loadkhunggiohang() {
+    for (var i = table.rows.length - 1; i > 0; i--) {
+      table.deleteRow(i);
+    }
+        for (let x of mangsp) {
+        row = table.insertRow();
+        cell1 = row.insertCell();
+        cell1.innerText = x.ten;
+        cell1.style.backgroundColor = 'white';
+        cell2 = row.insertCell();
+        cell2.style.padding = '0';
+        cell2.innerHTML = '<img src="' + x.hinh + '" width="100%" style = "width:80px;margin-left:34px;" >';
+        cell2.style.backgroundColor = 'white';
+        cell3 = row.insertCell();
+        cell3.innerText = x.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+" $";
+        cell3.style.backgroundColor = 'white';
+        }
+
+    }
+ 
+    function CLEARCART()
+    {
+        mangsp=[];
+        tongtien=0;
+        txtsoluong.innerText = 0;
+        txttongtien.innerText = 0;
+    }
+</script>
